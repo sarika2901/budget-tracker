@@ -23,7 +23,7 @@ const AddExpenseForm = () => {
   };
   return (
     <form onSubmit={onSubmit}>
-      <div className="row">
+      <div className="row d-flex align-items-md-end">
         <div className="col-sm">
           <label for="name">Name</label>
           <input

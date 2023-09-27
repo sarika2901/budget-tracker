@@ -14,16 +14,21 @@ const AppReducer = (state, action) => {
           (expense) => expense.id !== action.payload
         ),
       };
+    case "SET_BUDGET":
+      return {
+        ...state,
+        budget: action.payload,
+      };
     default:
       return state;
   }
 };
 const initialState = {
-  budget: 2000,
+  budget: 0,
   expenses: [
-    { id: 11, name: "shopping", cost: 40 },
-    { id: 12, name: "holiday", cost: 400 },
-    { id: 14, name: "car service", cost: 50 },
+    // { id: 11, name: "shopping", cost: 40 },
+    // { id: 12, name: "holiday", cost: 400 },
+    // { id: 14, name: "car service", cost: 50 },
   ],
 };
 
