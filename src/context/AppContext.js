@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 const AppReducer = (state, action) => {
   switch (action.type) {
@@ -19,6 +19,8 @@ const AppReducer = (state, action) => {
         ...state,
         budget: action.payload,
       };
+    case "RESET":
+      return initialState;
     default:
       return state;
   }
@@ -35,7 +37,14 @@ const initialState = {
 export const AppContext = createContext();
 
 export const AppProvider = (props) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(AppReducer, initialState, () => {
+    const savedState = localStorage.getItem("expensesData");
+    return savedState ? JSON.parse(savedState) : initialState;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("expensesData", JSON.stringify(state));
+  }, [state]);
 
   return (
     <AppContext.Provider
